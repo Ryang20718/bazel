@@ -56,6 +56,11 @@ if [[ -z "$COVERAGE_MANIFEST" ]]; then
   env | sort
   exit 1
 fi
+
+##### custom patch
+PYTHON_RUNFILES=${PYTHON_RUNFILES:-""}
+#####
+
 # When collect_coverage.sh is used, test runner must be instructed not to cd
 # to the test's runfiles directory.
 export ROOT="$PWD"
@@ -169,7 +174,7 @@ fi
 # ------------------EXPERIMENTAL---------------------
 # After this point we can run the code necessary for the coverage spawn
 
-if [[ "$SPLIT_COVERAGE_POST_PROCESSING" == "1" && "$IS_COVERAGE_SPAWN" == "0" ]]; then
+if [[ "$SPLIT_COVERAGE_POST_PROCESSING" == "1" && "$IS_COVERAGE_SPAWN" == "0" && "$PYTHON_RUNFILES" == "" ]]; then
   exit 0
 fi
 
